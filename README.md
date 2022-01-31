@@ -26,7 +26,7 @@ calendar.init({
 
 ## Documentation
 
-See the [docs](/docs/index) for detailed information.
+See the [docs](./docs/index.md) for detailed information.
 
 ## License
 

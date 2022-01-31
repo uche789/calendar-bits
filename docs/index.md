@@ -2,8 +2,7 @@
 
 ## Table of Contents
 
-- [Quickstart](quickstart)
-- [Api reference](api)
-- [Generated calendar data](generated-data)
-  - [Sample data](sample-data)
+- [Quickstart](./quickstart.md)
+- [Api reference](./api.md)
+- [Generated calendar data](./generated-data.md)
   
