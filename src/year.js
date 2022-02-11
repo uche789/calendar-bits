@@ -7,7 +7,7 @@ import dateConsts from './constants/days'
  * @typedef CalendarMonth
  * @property {number} key
  * @property {string} name
- * @property {CalendarValues} data
+ * @property {CalendarValues} calendarValues
  */
 
 /**
@@ -136,7 +136,7 @@ export default class Year {
             months[i] = {
                 key: i,
                 name: dateConsts.months[i],
-                data: this.generateCalendarValues(i)
+                calendarValues: this.generateCalendarValues(i)
             };
         }
 

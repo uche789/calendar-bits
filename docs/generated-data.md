@@ -7,10 +7,24 @@
 Each calendar month object has a `key` attribute ranging from 0 to 11 (January to December), a `name` attribute and a `data` attribute to generate each field in the calendar.
 
 ```typescript
+type ValueName = {
+    value:  number,
+    name: 'january' | 'febuary' | 'march' | 'april' | 'may' | 'june' | 'july' | 'august' | 'september' | 'october' | 'november' | 'december'
+}
+
 interface CalendarMonth {
-    key: number,
-    name: string, // january, febuary, march ...
-    data: Record<number, Array<{
+    date: {
+        object: Date,
+        currentDate: 31,
+        currentDay: 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun',
+        currentMonth: ValueName,
+        prevMonth: ValueName,
+        nextMonth: ValueName,
+        currentYear: 2022,
+        prevYear: number,
+        nextYear: number
+    },
+    calendarValues: Record<number, Array<{
         type: string, //prev, next or current
         value: number,
         dateValue: string
@@ -18,9 +32,9 @@ interface CalendarMonth {
 }
 ```
 
-### `data`
+### `calendarValues`
 
-The `data` attribute is an object with 6 keys ranging from 1-6. Each number indicates a row in the calendar. Each key (row) has an array of 7 data fields (columns) for the dates from Sunday to Saturday.
+The `calendarValues` attribute is an object with 6 keys ranging from 1-6. Each number indicates a row in the calendar. Each key (row) has an array of 7 data fields (columns) for the dates from Sunday to Saturday.
 
 |Sun|Mon|Tue|Wed|Thu|Fri|Sat|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -54,5 +68,17 @@ The `dateValue` attribute is the date string with the format `YYYY-MM-DD`.
 The `getCalendarYear` function returns the calendar year as an object with keys ranging from 0 - 11 (Jan - Feburary). The value corresponds to the data for the calendar month.
 
 ```typescript
-type CalendarYear = Record<number, CalendarMonth>
+interface YearCalendarMonth {
+    key: number,
+    name: string, // january, febuary, march ...
+    calendarValues: Record<number, Array<{
+        type: string, //prev, next or current
+        value: number,
+        dateValue: string
+    }>>
+}
+```
+
+```typescript
+type CalendarYear = Record<number, YearCalendarMonth>
 ```
