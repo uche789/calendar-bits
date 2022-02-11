@@ -2,6 +2,7 @@
 
 CalendarBits is a lightweight library for building calendar or date picker UI without the tedious groundwork.
 
+[Demo](https://simplearchitect.dev/projects/clndrbits/)
 ## Installation
 
 - Via the CDN: `<script src="https://unpkg.com/calendar-bits"></script>`
@@ -26,7 +27,7 @@ calendar.init({
 
 ## Documentation
 
-See the [docs](./docs/index.md) for detailed information.
+See the [docs](https://github.com/uche789/calendar-bits/blob/main/docs/index.md) for detailed information.
 
 ## License
 
