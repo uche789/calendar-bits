@@ -1,6 +1,6 @@
 {
   "name": "calendar-bits",
-  "version": "0.0.3-rc",
+  "version": "0.0.4-rc",
   "description": "Lightweight calendar data generator",
   "keywords": [
     "calendar",
