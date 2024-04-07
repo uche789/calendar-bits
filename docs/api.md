@@ -9,7 +9,7 @@ CalenderBits must first be initialized before it can be used.
 ```typescript
 calendar.init({
     dataValue: new Date(), // Date object, number or YYYY-MM-DD string
-    dateChanged: (res: any) =>  {} // callback after the date has been set
+    dateChanged: (res) =>  {} // callback after the date has been set
 })
 ```
 
@@ -55,7 +55,7 @@ calendar.getPrevYear()
 
 ## `getCalendarMonth`
 
-Get the calendar month values.
+Returns the calendar month values.
 
 ```typescript
 calendar.getCalendarMonth()
@@ -63,7 +63,7 @@ calendar.getCalendarMonth()
 
 ## `getCalendarYear`
 
-Get the calendar year values.
+Returns the calendar year values.
 
 ```typescript
 calendar.getCalendarYear()

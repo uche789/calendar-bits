@@ -2,7 +2,7 @@
 
 ## Installation
 
-First install the package:
+Install the package:
 
 ```bash
 #npm
@@ -25,7 +25,7 @@ import { calendar } from 'calendar-bits';
 
 calendar.init({
     dataValue: new Date(), //
-    dateChanged: (res: any) =>  {}
+    dateChanged: (res) =>  {}
 })
 ```
 
@@ -35,7 +35,7 @@ In the browser, the global object `ClndrBits` is initialized.
 <script>
     ClndrBits.calendar.init({
         dataValue: new Date(), //
-        dateChanged: (res: any) =>  {}
+        dateChanged: (res) =>  {}
     })
 </script>
 ```

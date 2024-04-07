@@ -17,10 +17,10 @@ import dateConsts from './constants/days'
  * @property {string} dateValue
  */
 
- /**
- * @typedef CalendarValues
- * @type {Object.<number, Array.<DateCell>}
- */
+/**
+* @typedef CalendarValues
+* @type {Object.<number, Array.<DateCell>}
+*/
 
 export default class Year {
     /** @type CalendarValues */
@@ -34,7 +34,7 @@ export default class Year {
         if (dateValue && (new Date(dateValue)).toDateString() === 'Invalid Date') {
             throw new Error("Invalid argument: dateValue");
         }
-        
+
         this.date = dateValue ? new Date(dateValue) : new Date();
         this.generate();
     }
@@ -70,16 +70,16 @@ export default class Year {
         if (type === dateConsts.monthType.PREV_MONTH) {
             return (
                 currentMonth === 0 && month === 11
-                ? currentYear -= 1
-                : currentYear
+                    ? currentYear -= 1
+                    : currentYear
             );
         }
-    
+
         if (type === dateConsts.monthType.NEXT_MONTH) {
             return (
                 currentMonth === 11 && month === 0
-                ? currentYear += 1
-                : currentYear
+                    ? currentYear += 1
+                    : currentYear
             );
         }
 
@@ -155,7 +155,7 @@ export default class Year {
      * @param {number} month 
      * @returns {CalendarValues}
      */
-     generateCalendarValues(month) {
+    generateCalendarValues(month) {
         const year = this.date.getFullYear();
         const nextMonth = this.getMonth(dateConsts.monthType.NEXT_MONTH, month);
         const prevMonth = this.getMonth(dateConsts.monthType.PREV_MONTH, month);
@@ -178,13 +178,13 @@ export default class Year {
         const carryOverDaysFromPrevMnth = startDay.key - 1;
         // calculate the earliest possible start date
         let startingValueForPrevMnth = noOfDaysPrevMnth - carryOverDaysFromPrevMnth;
-        
+
         // Set first row
         let nextRow = 1;
         const rows = {
             [nextRow]: [],
         };
-        
+
         // value used to fill array
         let currentDate = 1;
         let nextDate = 1;
@@ -196,13 +196,13 @@ export default class Year {
                 rows[nextRow].push({
                     type: 'prev',
                     value: startingValueForPrevMnth,
-                    dateValue: 
+                    dateValue:
                         `${this.getValidYearForMonth(
                             dateConsts.monthType.PREV_MONTH,
                             month,
                             prevMonth,
                             year
-                        )}-${prevMonth+1}-${startingValueForPrevMnth}`
+                        )}-${prevMonth + 1}-${startingValueForPrevMnth}`
                 });
                 startingValueForPrevMnth++;
             } else if (currentDate <= noOfDaysCurrentMnth) {
@@ -211,7 +211,7 @@ export default class Year {
                 rows[nextRow].push({
                     type: 'current',
                     value: currentDate,
-                    dateValue: `${year}-${month+1}-${currentDate}`
+                    dateValue: `${year}-${month + 1}-${currentDate}`
                 });
                 currentDate++;
             } else {
@@ -219,13 +219,13 @@ export default class Year {
                 rows[nextRow].push({
                     type: 'next',
                     value: nextDate,
-                    dateValue: 
+                    dateValue:
                         `${this.getValidYearForMonth(
                             dateConsts.monthType.NEXT_MONTH,
                             month,
                             nextMonth,
                             year,
-                        )}-${nextMonth+1}-${nextDate}`
+                        )}-${nextMonth + 1}-${nextDate}`
                 });
                 nextDate++;
             }

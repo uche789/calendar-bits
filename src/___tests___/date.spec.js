@@ -1,5 +1,5 @@
-import CBDate from './date';
-import dateConsts from './constants/days'
+import CBDate from '../date';
+import dateConsts from '../constants/days'
 
 function formatCalendarValues(result) {
     const endResult = {}

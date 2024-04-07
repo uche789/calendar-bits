@@ -1,40 +1,56 @@
-# Using calendar values
+# Generated data
 
 ## Calendar month
 
-`getCalendarMonth` function returns all the data needed to generate the calendar month.
+The `getCalendarMonth` function returns an object with the data needed to generate the calendar month.
 
-Each calendar month object has a `key` attribute ranging from 0 to 11 (January to December), a `name` attribute and a `data` attribute to generate each field in the calendar.
+|Property|Description|
+|-|-|
+|`date`|See the __date__ section below. |
+|`calendarValues`|See the __calendarValues__ section below.|
 
-```typescript
-type ValueName = {
-    value:  number,
-    name: 'january' | 'febuary' | 'march' | 'april' | 'may' | 'june' | 'july' | 'august' | 'september' | 'october' | 'november' | 'december'
-}
+### <a name="date"></a>`date`
 
-interface CalendarMonth {
-    date: {
-        object: Date,
-        currentDate: 31,
-        currentDay: 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun',
-        currentMonth: ValueName,
-        prevMonth: ValueName,
-        nextMonth: ValueName,
-        currentYear: 2022,
-        prevYear: number,
-        nextYear: number
-    },
-    calendarValues: Record<number, Array<{
-        type: string, //prev, next or current
-        value: number,
-        dateValue: string
-    }>>
-}
-```
+This property holds information about the current date of the month (ex: 2022-02-01).
 
-### `calendarValues`
+#### object
 
-The `calendarValues` attribute is an object with 6 keys ranging from 1-6. Each number indicates a row in the calendar. Each key (row) has an array of 7 data fields (columns) for the dates from Sunday to Saturday.
+`Date` object ex: Wed Feb 02 2022 01:00:00 GMT+0100 (Central European Standard Time)
+
+#### currentDate
+
+Number from 1 - 31
+
+#### currentDay
+Values: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`
+
+#### currentMonth
+
+Returns an object with the `value` (0-11 match January - December) and `name` (ex: january, febuary etc.) properties.
+
+#### prevMonth
+
+Returns the same object structure as `currentMonth` with information for the previous month.
+
+#### nextMonth
+
+Returns the same object structure as `currentMonth` with information for the previous month.
+
+#### currentYear
+
+Current Year ex: 2022
+
+#### prevYear: number
+
+Previous Year ex: 2021
+
+#### nextYear: number
+
+Previous Year ex: 2023
+
+### <a name="calenderValues"></a>`calendarValues`
+
+The `calendarValues` property has six keys (rows) ranging from 1-6. Each key (row) has an array of seven data fields (columns) for the dates from Sunday to Saturday.
 
 |Sun|Mon|Tue|Wed|Thu|Fri|Sat|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -45,9 +61,9 @@ The `calendarValues` attribute is an object with 6 keys ranging from 1-6. Each n
 | x | x | x | x | x | x | x |
 | x | x | x | x | x | x | x |
 
-\* _x represent a field or a cell with location data[rowNumber][columnNumber]_
+\* _x represent a cell (data[rowNumber][columnNumber]) is a date in the month_
 
-Each cell in the calendar represents a data field. A data field has the `type`, `value` and `dataValue` attributes.
+A cell is a data field with the following properties: `type`, `value` and `dataValue`.
 
 ### data field attributes
 
@@ -57,7 +73,7 @@ The `type` attribute has a value of `prev`, `current`, or `next`, indicating if 
 
 #### `value`
 
-The `value` attribute is the actual date in the month (0-31).
+The `value` attribute is the actual date in the month (1-31).
 
 #### `dateValue`
 
@@ -67,18 +83,27 @@ The `dateValue` attribute is the date string with the format `YYYY-MM-DD`.
 
 The `getCalendarYear` function returns the calendar year as an object with keys ranging from 0 - 11 (Jan - Feburary). The value corresponds to the data for the calendar month.
 
-```typescript
-interface YearCalendarMonth {
-    key: number,
-    name: string, // january, febuary, march ...
-    calendarValues: Record<number, Array<{
-        type: string, //prev, next or current
-        value: number,
-        dateValue: string
-    }>>
-}
-```
+Each calendar month object has a `key` property ranging from 0 to 11 (January to December), a `name` (month) property and a [`calenderValues`](#calenderValues) property with data for each day of the month.
 
-```typescript
-type CalendarYear = Record<number, YearCalendarMonth>
+```json
+[
+    {
+        "0": {
+            "key": 0,
+            "name": "january",
+            "calendarValues": {
+                "1": [
+                    {
+                        "type": "prev",
+                        "value": 1,
+                        "dateValue": "2023-01-01"
+                    }
+                    //...
+                ]
+                //...
+            }
+        }
+        //...
+    }
+]
 ```

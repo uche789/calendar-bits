@@ -42,8 +42,8 @@ export default class CBDate {
      * @param {string | number | Date} options.dateValue - valid object
      * @param {string} options.dateChanged - function called after each update
      */
-    constructor({ dateValue = '', dateChanged = () => {} } = {}) {
-        this.init({dateValue, dateChanged})
+    constructor({ dateValue = '', dateChanged = () => { } } = {}) {
+        this.init({ dateValue, dateChanged })
     }
 
     /**
@@ -54,7 +54,7 @@ export default class CBDate {
      * 
      * @param {CalendarConfig} param0
      */
-    init({ dateValue = '', dateChanged = () => {} } = {}) {
+    init({ dateValue = '', dateChanged = () => { } } = {}) {
         if (typeof dateChanged !== 'function') {
             throw new Error('Invalid argument: dateChanged should be a functon');
         }
@@ -72,7 +72,7 @@ export default class CBDate {
         if (dateValue && (new Date(dateValue)).toDateString() === 'Invalid Date') {
             throw new Error("Invalid argument: dateValue");
         }
-        
+
         this.date.current = dateValue ? new Date(dateValue) : new Date();
         this.date.currentYear = this.date.current.getFullYear();
         this.date.currentMonth = this.date.current.getMonth();
@@ -157,15 +157,15 @@ export default class CBDate {
      */
     getNumberOfDays(type) {
         if (type === dateConsts.monthType.CURRENT_MONTH) {
-            return new Date(this.date.currentYear, this.date.currentMonth+1, 0).getDate();
+            return new Date(this.date.currentYear, this.date.currentMonth + 1, 0).getDate();
         }
-    
+
         if (type === dateConsts.monthType.PREV_MONTH) {
-            return new Date(this.getValidYearForMonth(type), this.date.prevMonth+1, 0).getDate();
+            return new Date(this.getValidYearForMonth(type), this.date.prevMonth + 1, 0).getDate();
         }
-    
+
         if (type === dateConsts.monthType.NEXT_MONTH) {
-            return new Date(this.getValidYearForMonth(type), this.date.nextMonth+1, 0).getDate();
+            return new Date(this.getValidYearForMonth(type), this.date.nextMonth + 1, 0).getDate();
         }
     }
 
@@ -178,16 +178,16 @@ export default class CBDate {
         if (type === dateConsts.monthType.PREV_MONTH) {
             return (
                 this.date.currentMonth === 0 && this.date.prevMonth === 11
-                ? this.date.prevYear
-                : this.date.currentYear
+                    ? this.date.prevYear
+                    : this.date.currentYear
             );
         }
-    
+
         if (type === dateConsts.monthType.NEXT_MONTH) {
             return (
                 this.date.currentMonth === 11 && this.date.nextMonth === 0
-                ? this.date.nextYear
-                : this.date.currentYear
+                    ? this.date.nextYear
+                    : this.date.currentYear
             );
         }
 
@@ -234,7 +234,7 @@ export default class CBDate {
         const rows = {
             [nextRow]: [],
         };
-        
+
         // value used to fill array
         let currentDate = 1;
         let nextDate = 1;
@@ -246,8 +246,8 @@ export default class CBDate {
                 rows[nextRow].push({
                     type: 'prev',
                     value: startingValueForPrevMnth,
-                    dateValue: 
-                        `${this.getValidYearForMonth(dateConsts.monthType.PREV_MONTH)}-${this.date.prevMonth+1}-${startingValueForPrevMnth}`
+                    dateValue:
+                        `${this.getValidYearForMonth(dateConsts.monthType.PREV_MONTH)}-${this.date.prevMonth + 1}-${startingValueForPrevMnth}`
                 });
                 startingValueForPrevMnth++;
             } else if (currentDate <= noOfDaysCurrentMnth) {
@@ -256,7 +256,7 @@ export default class CBDate {
                 rows[nextRow].push({
                     type: 'current',
                     value: currentDate,
-                    dateValue: `${this.date.currentYear}-${this.date.currentMonth+1}-${currentDate}`
+                    dateValue: `${this.date.currentYear}-${this.date.currentMonth + 1}-${currentDate}`
                 });
                 currentDate++;
             } else {
@@ -264,8 +264,8 @@ export default class CBDate {
                 rows[nextRow].push({
                     type: 'next',
                     value: nextDate,
-                    dateValue: 
-                        `${this.getValidYearForMonth(dateConsts.monthType.NEXT_MONTH)}-${this.date.nextMonth+1}-${nextDate}`
+                    dateValue:
+                        `${this.getValidYearForMonth(dateConsts.monthType.NEXT_MONTH)}-${this.date.nextMonth + 1}-${nextDate}`
                 });
                 nextDate++;
             }
@@ -308,7 +308,7 @@ export default class CBDate {
      * to generate a calendar for a given month
      * @returns {FormattedDateProp} date properties and calendar values
      */
-getDateValues() {
+    getDateValues() {
         return {
             date: {
                 object: this.date.current,
